@@ -1,6 +1,5 @@
 all: hello
-
-myprog: hello.c
+hello: hello.c
 	gсс -Wall -Werror -o hello hello.c
 clean:
 	rm hello
