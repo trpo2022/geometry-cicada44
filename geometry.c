@@ -10,19 +10,21 @@ struct Circle{
 	int o;
 };
 
-int isBracket(char *arr){
-	for (int x=0; x<20; x++) if (arr[x]=='(') return 1;
+int isOpnBracket(char *arr, int c){
+	for (int c=0; c<20; c++) if (arr[c]=='(') return c;
+	return 0;
+}
+
+int isClsBracket(char *arr, int cnt){
+	for (int x=cnt; x<20; x++) if (arr[x]==')') return x;
 	return 0;
 }
 
 int main(){
-	char inputStr[20];
 	struct Circle c1;
-	int t;
-	char nameObject[20];
-	char coords[20];
-	int j=0, k=0;
+	char inputStr[20], nameObject[20], coords[20];
 	char cir[]="circle\0";
+	int t, j=0, k=0, i=0;
 
 	printf("Input the case\n1-stdin input\t2-file input\n");
 	scanf("%d", &t);
@@ -30,18 +32,20 @@ int main(){
 	switch(t){
 		case 1:
 			scanf("%s", inputStr);
-			int brCheck = isBracket(inputStr);
-			if (brCheck==1) {
-				while(inputStr[j]!='('){
-					nameObject[k] = inputStr[j];
+			int opnBrCheck = isOpnBracket(inputStr, j);
+			int clsBrCheck = isClsBracket(inputStr, j);
+			if (opnBrCheck && clsBrCheck && clsBrCheck>opnBrCheck) {
+				while(inputStr[k]!='('){
+					nameObject[k] = inputStr[k];
 					k++;
-					j++;
+				}
+				while(inputStr[k+1]!=')'){
+					coords[i] = inputStr[k+1];
+					i++;
+					k++;
 				}
 			}
-			else {
-				printf("Missing the openbracket");
-			}
-			printf("%s", nameObject);
+			else printf("[ERROR] - Problem with brackets");
 			
 		case 2:
 			
