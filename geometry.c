@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 
 struct Point{
 	int x;
@@ -45,7 +46,16 @@ int main(){
 					k++;
 				}
 			}
-			else printf("[ERROR] - Problem with brackets");
+			else{
+				printf("[ERROR] - Problem with brackets");
+				break;
+			}
+			for (int x=0; x<20; x++){
+				if (nameObject[x]!=cir[x] || toupper(nameObject[x])!=cir[x]){
+					printf("[ERROR] - problem(s) with object name");
+					break;
+				}
+			}
 			
 		case 2:
 			
