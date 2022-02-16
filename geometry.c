@@ -50,8 +50,8 @@ int main(){
 				printf("[ERROR] - Problem with brackets");
 				break;
 			}
-			for (int x=0; x<20; x++){
-				if (nameObject[x]!=cir[x] || toupper(nameObject[x])!=cir[x]){
+			for (int x=0; x<7; x++){
+				if (nameObject[x]!=cir[x] && toupper(nameObject[x])!=cir[x] && tolower(nameObject[x])!=cir[x]){
 					printf("[ERROR] - problem(s) with object name");
 					break;
 				}
