@@ -1,16 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-struct Point{
-	int x;
-	int y;
-};
-
-struct Circle{
-	struct Point;
-	int o;
-};
-
 int isOpnBracket(char *arr, int c){
 	for (int c=0; c<20; c++) if (arr[c]=='(') return c;
 	return 0;
