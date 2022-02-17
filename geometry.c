@@ -21,13 +21,20 @@ int isClsBracket(char *arr, int cnt){
 	return 0;
 }
 
-int objNameCheck(char *arr, char *cir){
+int isCorrectName(char *nameObject, char *cir){
 	for (int x=0; x<7; x++){
 		if (nameObject[x]!=cir[x] && toupper(nameObject[x])!=cir[x] && tolower(nameObject[x])!=cir[x]){
 			return 0;
 		}
 	}
 	return 1;
+}
+
+int isCorrectCntComma(char *arrCoords){
+	unsigned short commaCnt;
+	for (int x=0; x<20; x++) if (arrCoords[x]==',') commaCnt++;
+	if (commaCnt==2) return 1;
+	return 0;
 }
 
 int main(){
@@ -59,12 +66,16 @@ int main(){
 				printf("[ERROR] - Problem with brackets");
 				break;
 			}
-			isCorrectName = objNameCheck(nameObject, cir);
-			if (isCorrectName==0){
+			int correctNameCheck = isCorrectName(nameObject, cir);
+			if (correctNameCheck==0){
 				printf("[ERROR] - Problems with object name");
+				break;
 			}
-			short commaCnt = 0;
-			for (int x=0; x<20; x++) if (coords[x]==',') commaCnt++
+			int correctCntCommaCheck = isCorrectCntComma(coords);
+			if (correctCntCommaCheck==0){
+				printf("[ERROR] - Too many or too few arguments");
+				break;
+			}
 			
 		case 2:
 			
