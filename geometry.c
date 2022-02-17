@@ -40,46 +40,59 @@ int isCorrectCntComma(char *arrCoords){
 int main(){
 	struct Circle c1;
 	char inputStr[20], nameObject[20], coords[20];
+	char firstCenterCoord[5], secondCenterCoord[5], radius[5];
 	char cir[]="circle\0";
-	int t, j=0, k=0, i=0;
+	int j=0, k=0, i=0;
 
-	printf("Input the case\n1-stdin input\t2-file input\n");
-	scanf("%d", &t);
+	printf("Input the object\n");
 
-	switch(t){
-		case 1:
-			scanf("%s", inputStr);
-			int opnBrCheck = isOpnBracket(inputStr, j);
-			int clsBrCheck = isClsBracket(inputStr, j);
-			if (opnBrCheck && clsBrCheck && clsBrCheck>opnBrCheck) {
-				while(inputStr[k]!='('){
-					nameObject[k] = inputStr[k];
-					k++;
-				}
-				while(inputStr[k+1]!=')'){
-					coords[i] = inputStr[k+1];
-					i++;
-					k++;
-				}
-			}
-			else{
-				printf("[ERROR] - Problem with brackets");
-				break;
-			}
-			int correctNameCheck = isCorrectName(nameObject, cir);
-			if (correctNameCheck==0){
-				printf("[ERROR] - Problems with object name");
-				break;
-			}
-			int correctCntCommaCheck = isCorrectCntComma(coords);
-			if (correctCntCommaCheck==0){
-				printf("[ERROR] - Too many or too few arguments");
-				break;
-			}
-			
-		case 2:
-			
+	scanf("%s", inputStr);
+	int opnBrCheck = isOpnBracket(inputStr, j);
+	int clsBrCheck = isClsBracket(inputStr, j);
+	if (opnBrCheck && clsBrCheck && clsBrCheck>opnBrCheck) {
+		while(inputStr[k]!='('){
+			nameObject[k] = inputStr[k];
+			k++;
+		}
+		while(inputStr[k+1]!=')'){
+			coords[i] = inputStr[k+1];
+			i++;
+			k++;
+		}
 	}
-
+	else{
+		printf("[ERROR] - Problem with brackets");
+		return 1;
+	}
+	int correctNameCheck = isCorrectName(nameObject, cir);
+	if (correctNameCheck==0){
+		printf("[ERROR] - Problems with object name");
+		return 1;
+	}
+	int correctCntCommaCheck = isCorrectCntComma(coords);
+	if (correctCntCommaCheck==0){
+		printf("[ERROR] - Too many or too few arguments");
+		return 1;
+	}
+	i=0;
+	while (coords[i]!=','){
+		firstCenterCoord[i] = coords[i];
+		i++;
+	}
+	i++;
+	j=0;
+	while (coords[i]!=','){
+		secondCenterCoord[j] = coords[i];
+		i++;
+		j++;
+	}
+	i++;
+	k=0;
+	while (1){
+		if (!isdigit(coords[i])) break;
+		radius[k] = coords[i];
+		i++;
+		k++;
+	}
 	return 0;
 }
