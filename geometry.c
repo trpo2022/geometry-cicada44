@@ -21,6 +21,15 @@ int isClsBracket(char *arr, int cnt){
 	return 0;
 }
 
+int objNameCheck(char *arr, char *cir){
+	for (int x=0; x<7; x++){
+		if (nameObject[x]!=cir[x] && toupper(nameObject[x])!=cir[x] && tolower(nameObject[x])!=cir[x]){
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int main(){
 	struct Circle c1;
 	char inputStr[20], nameObject[20], coords[20];
@@ -50,12 +59,12 @@ int main(){
 				printf("[ERROR] - Problem with brackets");
 				break;
 			}
-			for (int x=0; x<7; x++){
-				if (nameObject[x]!=cir[x] && toupper(nameObject[x])!=cir[x] && tolower(nameObject[x])!=cir[x]){
-					printf("[ERROR] - problem(s) with object name");
-					break;
-				}
+			isCorrectName = objNameCheck(nameObject, cir);
+			if (isCorrectName==0){
+				printf("[ERROR] - Problems with object name");
 			}
+			short commaCnt = 0;
+			for (int x=0; x<20; x++) if (coords[x]==',') commaCnt++
 			
 		case 2:
 			
