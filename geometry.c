@@ -10,13 +10,14 @@ int main(){
 	char firstCenterCoord[COORDSIZE], secondCenterCoord[COORDSIZE], radius[COORDSIZE];
 	char cir[cirSize];
 	// cir[cirSize] = "circle\0" is not working
-	// he line below means cir="circle\0"
+	// the line below means cir="circle\0"
 	cir[0]='c'; cir[1]='i'; cir[2]='r'; cir[3]='c'; cir[4]='l'; cir[5]='e'; cir[6]='\0';
 	int j=0, k=0, i=0;
 
 	printf("Input the object\n");
 
-	scanf("%s", inputStr);
+	fgets(inputStr, STRINGSIZE, stdin);
+
 	int opnBrCheck = isOpnBracket(inputStr, j);
 	int clsBrCheck = isClsBracket(inputStr, j);
 	if (opnBrCheck && clsBrCheck && clsBrCheck>opnBrCheck) {
@@ -59,6 +60,7 @@ int main(){
 	i++;
 	k=0;
 	while (1){
+		if (coords[i]==' ') continue;
 		if (!isdigit(coords[i])) break;
 		radius[k] = coords[i];
 		i++;
