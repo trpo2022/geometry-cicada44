@@ -33,7 +33,7 @@ int main()
             nameObject[k] = inputStr[k];
             k++;
         }
-        while (inputStr[k + 1] != ')') {
+        while (inputStr[k] != ')') {
             coords[i] = inputStr[k + 1];
             i++;
             k++;
@@ -53,24 +53,24 @@ int main()
         return 1;
     }
     i = 0;
-    while (coords[i] != ',') {
+    while (coords[i] != ' ') {
         firstCenterCoord[i] = coords[i];
         i++;
     }
     i++;
-    j = 0;
+    j=0;
     while (coords[i] != ',') {
         secondCenterCoord[j] = coords[i];
         i++;
         j++;
     }
     i++;
-    k = 0;
-    while (1) {
-        if (coords[i] == ' ')
+    k=0;
+    while (coords[i] != ')') {
+        if (coords[i] == ' '){
+            i++;
             continue;
-        if (!isdigit(coords[i]))
-            break;
+        }
         radius[k] = coords[i];
         i++;
         k++;
