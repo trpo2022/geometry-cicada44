@@ -1,3 +1,4 @@
+#include <ctype.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
@@ -14,7 +15,7 @@ int isClsBracket(char *arr, int cnt){
 int isCorrectName(char *nameObject, char *cir, int cirSize){
 	for (int x=0; x<cirSize; x++){
 		if (nameObject[x]!=cir[x] && toupper(nameObject[x])!=cir[x] && tolower(nameObject[x])!=cir[x]){
-			return 0;
+				return 0;
 		}
 	}
 	return 1;
