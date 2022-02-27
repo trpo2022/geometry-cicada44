@@ -4,17 +4,21 @@
 
 int isOpnBracket(char* arr, int c)
 {
-    for (int c = 0; c < STRINGSIZE; c++)
-        if (arr[c] == '(')
+    for (int c = 0; c < STRINGSIZE; c++) {
+        if (arr[c] == '(') {
             return c;
+	}
+    }
     return 0;
 }
 
 int isClsBracket(char* arr, int cnt)
 {
-    for (int x = cnt; x < STRINGSIZE; x++)
-        if (arr[x] == ')')
+    for (int x = cnt; x < STRINGSIZE; x++) {
+        if (arr[x] == ')') {
             return x;
+	}
+    }
     return 0;
 }
 
@@ -32,11 +36,13 @@ int isCorrectName(char* nameObject, char* cir, int cirSize)
 int isCorrectCntComma(char* arrCoords)
 {
     int commaCnt = 0;
-    for (int x = 0; x < STRINGSIZE; x++)
+    for (int x = 0; x < STRINGSIZE; x++) {
         if (arrCoords[x] == ',')
             commaCnt++;
-    if (commaCnt == 1)
+    }
+    if (commaCnt == 1) {
         return 1;
+    }
     return 0;
 }
 
