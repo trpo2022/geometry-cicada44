@@ -39,7 +39,7 @@ int main()
             k++;
         }
     } else {
-        printf("[ERROR] - Problem with brackets");
+ 	       printf("[ERROR] - Problem with brackets");
         return 1;
     }
     int correctNameCheck = isCorrectName(nameObject, cir, cirSize);
