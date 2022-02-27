@@ -37,8 +37,9 @@ int isCorrectCntComma(char* arrCoords)
 {
     int commaCnt = 0;
     for (int x = 0; x < STRINGSIZE; x++) {
-        if (arrCoords[x] == ',')
+        if (arrCoords[x] == ',') {
             commaCnt++;
+        }
     }
     if (commaCnt == 1) {
         return 1;
