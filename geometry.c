@@ -39,7 +39,7 @@ int main()
             k++;
         }
     } else {
- 	printf("[ERROR] - Problem with brackets\n");
+        printf("[ERROR] - Problem with brackets\n");
         return 1;
     }
     int correctNameCheck = isCorrectName(nameObject, cir, cirSize);
@@ -58,16 +58,16 @@ int main()
         i++;
     }
     i++;
-    j=0;
+    j = 0;
     while (coords[i] != ',') {
         secondCenterCoord[j] = coords[i];
         i++;
         j++;
     }
     i++;
-    k=0;
+    k = 0;
     while (coords[i] != ')') {
-        if (coords[i] == ' '){
+        if (coords[i] == ' ') {
             i++;
             continue;
         }

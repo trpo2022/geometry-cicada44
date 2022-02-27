@@ -7,7 +7,7 @@ int isOpnBracket(char* arr, int c)
     for (int c = 0; c < STRINGSIZE; c++) {
         if (arr[c] == '(') {
             return c;
-	}
+        }
     }
     return 0;
 }
@@ -17,7 +17,7 @@ int isClsBracket(char* arr, int cnt)
     for (int x = cnt; x < STRINGSIZE; x++) {
         if (arr[x] == ')') {
             return x;
-	}
+        }
     }
     return 0;
 }
