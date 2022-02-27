@@ -39,17 +39,18 @@ int main()
             k++;
         }
     } else {
- 	       printf("[ERROR] - Problem with brackets");
+ 	       printf("[ERROR] - Problem with brackets\n");
         return 1;
     }
     int correctNameCheck = isCorrectName(nameObject, cir, cirSize);
     if (correctNameCheck == 0) {
-        printf("[ERROR] - Problems with object name");
+        printf("[ERROR] - Problems with object name\n");
         return 1;
     }
     int correctCntCommaCheck = isCorrectCntComma(coords);
+    printf("commaCnt = %d\n", correctCntCommaCheck);
     if (correctCntCommaCheck == 0) {
-        printf("[ERROR] - Too many or too few arguments");
+        printf("[ERROR] - Too many or too few arguments\n");
         return 1;
     }
     i = 0;
