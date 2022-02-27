@@ -39,7 +39,7 @@ int main()
             k++;
         }
     } else {
- 	       printf("[ERROR] - Problem with brackets\n");
+ 	printf("[ERROR] - Problem with brackets\n");
         return 1;
     }
     int correctNameCheck = isCorrectName(nameObject, cir, cirSize);
@@ -48,7 +48,6 @@ int main()
         return 1;
     }
     int correctCntCommaCheck = isCorrectCntComma(coords);
-    printf("commaCnt = %d\n", correctCntCommaCheck);
     if (correctCntCommaCheck == 0) {
         printf("[ERROR] - Too many or too few arguments\n");
         return 1;
