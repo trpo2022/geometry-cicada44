@@ -1,10 +1,10 @@
-#include "geomfunc.h"
+#include <geometrylib/geomfunc.h>
 #include <ctype.h>
 #include <stdio.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
-int isOpnBracket(char* arr, int c)
+int isOpnBracket(char* arr)
 {
     for (int c = 0; c < STRINGSIZE; c++) {
         if (arr[c] == '(') {
@@ -71,7 +71,7 @@ int coords()
 
     fgets(inputStr, STRINGSIZE, stdin);
 
-    int opnBrCheck = isOpnBracket(inputStr, j);
+    int opnBrCheck = isOpnBracket(inputStr);
     int clsBrCheck = isClsBracket(inputStr, j);
     if (opnBrCheck && clsBrCheck && clsBrCheck > opnBrCheck) {
         while (inputStr[k] != '(') {

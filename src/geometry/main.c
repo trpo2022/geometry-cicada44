@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include <geometrylib/geomfunc.h>
 
-int main(){
+int main()
+{
     coords();
 
     return 0;

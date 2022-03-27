@@ -1,1 +1,4 @@
-hello
+*.a
+*.d
+*.o
+bin/geometry
