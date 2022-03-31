@@ -1,6 +1,7 @@
-#include <geometrylib/geomfunc.h>
 #include <ctype.h>
+#include <geometrylib/geomfunc.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
@@ -125,5 +126,14 @@ int coords()
            firstCenterCoord,
            secondCenterCoord,
            radius);
+    double fCC = charToDouble(firstCenterCoord);
+    printf("zn = %.0lf\n", fCC);
     return 0;
+}
+
+double charToDouble(char* c1)
+{
+    double z1 = atof(c1);
+    printf("par = %lf\n", z1);
+    return z1;
 }
