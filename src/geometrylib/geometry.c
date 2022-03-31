@@ -1,8 +1,30 @@
-#include <geometrylib/geomfunc.h>
 #include <ctype.h>
+#include <geometrylib/geomfunc.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
+
+const float pi = 3.14;
+struct circle circleN;
+char cir[] = "circle";
+
+float charToFloat(char* c)
+{
+    double z = atof(c);
+    float r = (float)z;
+    return r;
+}
+
+void printCoords()
+{
+    printf("\nObject - %s\nCoordinates of center - (%0.2f,%0.2f)\nRadius - "
+           "%0.2f\n",
+           cir,
+           circleN.c1,
+           circleN.c2,
+           circleN.radius);
+}
 
 int isOpnBracket(char* arr)
 {
@@ -49,22 +71,12 @@ int isCorrectCntComma(char* arrCoords)
     return 0;
 }
 
-int coords()
+int coordsFind()
 {
     int cirSize = 8;
     char inputStr[STRINGSIZE], nameObject[STRINGSIZE], coords[STRINGSIZE];
     char firstCenterCoord[COORDSIZE], secondCenterCoord[COORDSIZE],
             radius[COORDSIZE];
-    char cir[cirSize];
-    // cir[cirSize] = "circle\0" is not working
-    // the line below means cir="circle\0"
-    cir[0] = 'c';
-    cir[1] = 'i';
-    cir[2] = 'r';
-    cir[3] = 'c';
-    cir[4] = 'l';
-    cir[5] = 'e';
-    cir[6] = '\0';
     int j = 0, k = 0, i = 0;
 
     printf("Input the object\n");
@@ -120,10 +132,22 @@ int coords()
         i++;
         k++;
     }
-    printf("\nObject - %s\nCoordinates of center - (%s,%s)\nRadius - %s\n",
-           nameObject,
-           firstCenterCoord,
-           secondCenterCoord,
-           radius);
+    float coord1 = charToFloat(firstCenterCoord);
+    float coord2 = charToFloat(secondCenterCoord);
+    float radiusF = charToFloat(radius);
+
+    circleN.c1 = coord1;
+    circleN.c2 = coord2;
+    circleN.radius = radiusF;
+
+    return 0;
+}
+
+int areaPerimeter()
+{
+    float perimeter = pi * 2 * circleN.radius;
+    float area = circleN.radius * circleN.radius * pi;
+
+    printf("Area = %0.2lf\nPerimeter = %0.2lf", area, perimeter);
     return 0;
 }
