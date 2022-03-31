@@ -2,7 +2,9 @@
 
 int main()
 {
-    coords();
+    coordsFind();
+    printCoords();
+    areaPerimeter();
 
     return 0;
 }

@@ -1,9 +1,16 @@
 #pragma once
 
+struct circle {
+    float c1;
+    float c2;
+    float radius;
+};
+
 int isOpnBracket(char* arr);
 int isClsBracket(char* arr, int cnt);
 int isCorrectName(char* nameObject, char* cir, int cirSize);
 int isCorrectCntComma(char* arrCoords);
-int coords();
-int areaPerimeter(char* c1, char* c2);
-double charToDouble(char* c1);
+int coordsFind();
+int areaPerimeter();
+void printCoords();
+float charToFloat(char* c1);
