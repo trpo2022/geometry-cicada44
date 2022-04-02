@@ -1,11 +1,12 @@
+#define _USE_MATH_DEFINES
 #include <ctype.h>
 #include <geometrylib/geomfunc.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
-const float pi = 3.14;
 struct circle circleN;
 char cir[] = "circle";
 
@@ -145,8 +146,8 @@ int coordsFind()
 
 int areaPerimeter()
 {
-    float perimeter = pi * 2 * circleN.radius;
-    float area = circleN.radius * circleN.radius * pi;
+    float perimeter = M_PI * 2 * circleN.radius;
+    float area = circleN.radius * circleN.radius * M_PI;
 
     printf("Area = %0.2lf\nPerimeter = %0.2lf", area, perimeter);
     return 0;
