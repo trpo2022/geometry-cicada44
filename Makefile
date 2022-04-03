@@ -1,10 +1,9 @@
 APP_NAME = geometry
 LIB_NAME = geometrylib
+DEBUG = -g3 -O0
 
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I src -MP -MMD
-LDFLAGS =
-LDLIBS =
 
 BIN_DIR = bin
 OBJ_DIR = obj
