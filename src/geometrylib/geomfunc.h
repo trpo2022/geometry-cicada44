@@ -1,6 +1,6 @@
 #pragma once
 
-struct circle {
+sruct circle {
     float c1;
     float c2;
     float radius;
