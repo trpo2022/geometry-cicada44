@@ -15,5 +15,5 @@ void printCoords(struct circle C);
 float charToFloat(char* c1);
 float perimeter(float radius);
 float area(float radius);
+int isintersection(struct circle c1, struct circle c2);
 void manysircles();
-void isintersection(struct circle c1, struct circle c2);

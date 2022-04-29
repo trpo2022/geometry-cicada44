@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES
 #include <ctype.h>
 #include <geometrylib/geomfunc.h>
 #include <math.h>
@@ -155,15 +154,15 @@ struct circle coordsFind()
     return circ;
 }
 
-void isintersection(struct circle c1, struct circle c2)
+int isintersection(struct circle c1, struct circle c2)
 {
     float fint
             = sqrt((c2.c1 - c1.c1) * (c2.c1 - c1.c1)
                    + (c2.c2 - c1.c2) * (c2.c2 - c1.c2));
     if (fint <= (c1.radius + c2.radius))
-        printf("The first two circles have instersection\n");
+        return 1;
     else
-        printf("The first two circles haven't instersection\n");
+        return 0;
 }
 
 void manysircles()
@@ -181,6 +180,9 @@ void manysircles()
         printf("\n");
     }
     printf("\n\n");
-    if (nObjects >= 2)
-        isintersection(circls[0], circls[1]);
+    if (nObjects >= 2){
+        int flagintersect = isintersection(circls[0], circls[1]);
+        if (flagintersect == 1) printf("The first two circles have instersection\n");
+        else printf("The first two circles haven't instersection\n");
+    }
 }

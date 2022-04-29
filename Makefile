@@ -1,62 +1,64 @@
-CC = gcc
-
 APP_NAME = geometry
 LIB_NAME = geometrylib
 TEST_NAME = test
+DEBUG =
 
 CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -I src -MP -MMD
-LDFLAGS =
-LDLIBS =
+CPPFLAGS = -I src -I thirdparty -MP -MMD
 
 BIN_DIR = bin
 OBJ_DIR = obj
 SRC_DIR = src
-TEST_DIR = test
 
-APP_PATH = bin/geometry
-TEST_PATH = bin/test
-LIB_PATH = obj/src/geometrylib/libgeometry.a
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME).a
+TEST_PATH = $(BIN_DIR)/$(TEST_NAME)
 
 SRC_EXT = c
 
-APP_SOURCES = $(shell find src/geometry -name '*.$(SRC_EXT)')
-APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
-
-TEST_SOURCES = $(shell find test -name '*.$(SRC_EXT)')
-TEST_OBJECTS = $(TEST_SOURCES:test/%.c=obj/test/%.o)
+APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/$(SRC_DIR)/%.o)
 
 LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
-LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+
+TEST_SOURCES = $(shell find $(TEST_NAME) -name '*.$(SRC_EXT)')
+TEST_OBJECTS = $(TEST_SOURCES:$(TEST_NAME)/%.c=$(OBJ_DIR)/$(TEST_NAME)/%.o)
 
 DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d) $(TEST_OBJECTS:.o=.d)
 
-.PHONY: test clean
-
-all: bin/geometry
+.PHONY: $(APP_NAME)
+$(APP_NAME): $(APP_PATH)
 
 -include $(DEPS)
 
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS) -lm
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -o $@ $^ -lm
 
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) -I thirdparty $< -o $@ -lm
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -c -o $@ $<
 
-	
-test: $(TEST_PATH)
-
+.PHONY: $(TEST_NAME)
+$(TEST_NAME): $(TEST_PATH)
 
 -include $(DEPS)
 
-$(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH)
-	$(CC) $(CFLAGS) -I thirdparty $^ -o $@ $(LDFLAGS) $(LDLIBS) -lm
+$(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH) 
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -o $@ $^ -lm
 
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) $(DEBUG) $(CPPFLAGS) -c -o $@ $<
 
+.PHONY: clean
 clean:
-	$(RM) $(APP_PATH) $(TEST_PATH) $(LIB_PATH)
-	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
-	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
+	rm -rf $(APP_PATH) $(LIB_PATH) $(TEST_PATH)
+	rm -rf $(DEPS) $(APP_OBJECTS) $(LIB_OBJECTS) $(TEST_OBJECTS)
+
+run:
+	-$(APP_PATH)
+
+run_test:
+	-$(TEST_PATH)
