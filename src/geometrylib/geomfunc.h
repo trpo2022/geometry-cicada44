@@ -8,9 +8,12 @@ struct circle {
 
 int isOpnBracket(char* arr);
 int isClsBracket(char* arr, int cnt);
-int isCorrectName(char* nameObject, char* cir, int cirSize);
 int isCorrectCntComma(char* arrCoords);
-int coordsFind();
-int areaPerimeter();
-void printCoords();
+struct circle coordsFind();
+int printAreaPerimeter(struct circle C);
+void printCoords(struct circle C);
 float charToFloat(char* c1);
+float perimeter(float radius);
+float area(float radius);
+void manysircles();
+void isintersection(struct circle c1, struct circle c2);
