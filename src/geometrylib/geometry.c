@@ -7,7 +7,6 @@
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
-struct circle circleN;
 char cir[] = "circle";
 
 float charToFloat(char* c)
