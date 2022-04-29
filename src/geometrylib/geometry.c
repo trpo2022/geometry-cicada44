@@ -1,13 +1,12 @@
-#define _USE_MATH_DEFINES
 #include <ctype.h>
 #include <geometrylib/geomfunc.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define STRINGSIZE 30
 #define COORDSIZE 5
 
-struct circle circleN;
 char cir[] = "circle";
 
 float charToFloat(char* c)
@@ -17,14 +16,14 @@ float charToFloat(char* c)
     return r;
 }
 
-void printCoords()
+void printCoords(struct circle C)
 {
     printf("\nObject - %s\nCoordinates of center - (%0.2f,%0.2f)\nRadius - "
            "%0.2f\n",
            cir,
-           circleN.c1,
-           circleN.c2,
-           circleN.radius);
+           C.c1,
+           C.c2,
+           C.radius);
 }
 
 int isOpnBracket(char* arr)
@@ -47,17 +46,6 @@ int isClsBracket(char* arr, int cnt)
     return 0;
 }
 
-int isCorrectName(char* nameObject, char* cir, int cirSize)
-{
-    for (int x = 0; x < cirSize; x++) {
-        if (nameObject[x] != cir[x] && toupper(nameObject[x]) != cir[x]
-            && tolower(nameObject[x]) != cir[x]) {
-            return 0;
-        }
-    }
-    return 1;
-}
-
 int isCorrectCntComma(char* arrCoords)
 {
     int commaCnt = 0;
@@ -72,15 +60,36 @@ int isCorrectCntComma(char* arrCoords)
     return 0;
 }
 
-int coordsFind()
+float area(float radius)
 {
-    int cirSize = 8;
+    float area = radius * radius * M_PI;
+    return area;
+}
+
+float perimeter(float radius)
+{
+    float perimeter = M_PI * 2 * radius;
+    return perimeter;
+}
+
+int printAreaPerimeter(struct circle C)
+{
+    float per = perimeter(C.radius);
+    float ar = area(C.radius);
+
+    printf("Area = %0.2lf\nPerimeter = %0.2lf", ar, per);
+    return 0;
+}
+
+struct circle coordsFind()
+{
+    struct circle circ;
     char inputStr[STRINGSIZE], nameObject[STRINGSIZE], coords[STRINGSIZE];
     char firstCenterCoord[COORDSIZE], secondCenterCoord[COORDSIZE],
             radius[COORDSIZE];
     int j = 0, k = 0, i = 0;
 
-    printf("Input the object\n");
+    printf("\nInput the object\n");
 
     fgets(inputStr, STRINGSIZE, stdin);
 
@@ -98,17 +107,17 @@ int coordsFind()
         }
     } else {
         printf("[ERROR] - Problem with brackets\n");
-        return 1;
+        exit(-1);
     }
-    int correctNameCheck = isCorrectName(nameObject, cir, cirSize);
-    if (correctNameCheck == 0) {
+    int correctNameCheck = strcmp(nameObject, cir);
+    if (correctNameCheck != 0) {
         printf("[ERROR] - Problems with object name\n");
-        return 1;
+        exit(-1);
     }
     int correctCntCommaCheck = isCorrectCntComma(coords);
     if (correctCntCommaCheck == 0) {
         printf("[ERROR] - Too many or too few arguments\n");
-        return 1;
+        exit(-1);
     }
     i = 0;
     while (coords[i] != ' ') {
@@ -137,18 +146,42 @@ int coordsFind()
     float coord2 = charToFloat(secondCenterCoord);
     float radiusF = charToFloat(radius);
 
-    circleN.c1 = coord1;
-    circleN.c2 = coord2;
-    circleN.radius = radiusF;
+    circ.c1 = coord1;
+    circ.c2 = coord2;
+    circ.radius = radiusF;
 
-    return 0;
+    return circ;
 }
 
-int areaPerimeter()
+int isintersection(struct circle c1, struct circle c2)
 {
-    float perimeter = M_PI * 2 * circleN.radius;
-    float area = circleN.radius * circleN.radius * M_PI;
+    float fint
+            = sqrt((c2.c1 - c1.c1) * (c2.c1 - c1.c1)
+                   + (c2.c2 - c1.c2) * (c2.c2 - c1.c2));
+    if (fint <= (c1.radius + c2.radius))
+        return 1;
+    else
+        return 0;
+}
 
-    printf("Area = %0.2lf\nPerimeter = %0.2lf", area, perimeter);
-    return 0;
+void manysircles()
+{
+    int nObjects;
+    printf("How many odjects you want to input: ");
+    do {
+        scanf("%d", &nObjects);
+    } while (getchar() != '\n');
+    struct circle circls[nObjects];
+    for (int x = 0; x < nObjects; x++) {
+        circls[x] = coordsFind();
+        printCoords(circls[x]);
+        printAreaPerimeter(circls[x]);
+        printf("\n");
+    }
+    printf("\n\n");
+    if (nObjects >= 2){
+        int flagintersect = isintersection(circls[0], circls[1]);
+        if (flagintersect == 1) printf("The first two circles have instersection\n");
+        else printf("The first two circles haven't instersection\n");
+    }
 }

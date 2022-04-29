@@ -2,9 +2,6 @@
 
 int main()
 {
-    coordsFind();
-    printCoords();
-    areaPerimeter();
-
+    manysircles();
     return 0;
 }
