@@ -19,9 +19,9 @@ CTEST(ctest, test_open_bracket)
 
 CTEST(ctest, test_comma)
 {
-    char str[] = "isinmystrcomma(,)";
+    char str[] = "isinmystrcomma()";
     int commaflag = isCorrectCntComma(str);
-    int expectedcntcomma = 1;
+    int expectedcntcomma = 0;
     ASSERT_EQUAL(expectedcntcomma, commaflag);
 }
 
