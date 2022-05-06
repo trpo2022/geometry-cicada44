@@ -1,6 +1,6 @@
 #include <geometrylib/geomfunc.h>
 
-int main()
+nt main()
 {
     manysircles();
     return 0;
